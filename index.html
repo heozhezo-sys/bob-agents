@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Studio Workspace</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="card">
+    <div class="badge">Agent Studio</div>
+    <h1>Your local build space</h1>
+    <p>
+      This folder is connected to a free OpenCode model. Ask the agent to build
+      something, or edit these files yourself.
+    </p>
+    <div class="row">
+      <button id="count">Clicked <span>0</span> times</button>
+      <a href="https://opencode.ai" target="_blank" rel="noreferrer">opencode.ai</a>
+    </div>
+    <ul>
+      <li>Preview updates when you save.</li>
+      <li>Run dev servers in the Terminal tab.</li>
+      <li>Every agent turn gets a rewind checkpoint.</li>
+    </ul>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
