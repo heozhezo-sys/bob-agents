@@ -148,7 +148,11 @@
     const model = models[Math.floor(Math.random() * models.length)];
     const row = document.createElement('div');
     row.className = 'rs-row';
-    row.innerHTML = `<span class="id">${id}</span><span class="msg">${a} · ${m}</span><span class="agent">${model}</span><span class="time">${ts}</span>`;
+    const s1 = document.createElement('span'); s1.className = 'id'; s1.textContent = id;
+    const s2 = document.createElement('span'); s2.className = 'msg'; s2.textContent = a + ' · ' + m;
+    const s3 = document.createElement('span'); s3.className = 'agent'; s3.textContent = model;
+    const s4 = document.createElement('span'); s4.className = 'time'; s4.textContent = ts;
+    row.append(s1, s2, s3, s4);
     stream.insertBefore(row, stream.firstChild);
     while (stream.children.length > 8) stream.removeChild(stream.lastChild);
   }, 3500);
@@ -171,7 +175,10 @@
     const cls = lvl === 'ok' ? 'ok' : lvl === 'warn' ? 'warn' : 'info';
     const div = document.createElement('div');
     div.className = 'l';
-    div.innerHTML = `<span class="ts">${ts}</span> <span class="lvl ${cls}">${lvl.toUpperCase()}</span>  ${body}`;
+    const t = document.createElement('span'); t.className = 'ts'; t.textContent = ts;
+    const l = document.createElement('span'); l.className = 'lvl ' + cls; l.textContent = lvl.toUpperCase();
+    const b = document.createTextNode('  ' + body);
+    div.append(t, document.createTextNode(' '), l, b);
     log.appendChild(div);
     log.scrollTop = log.scrollHeight;
     while (log.children.length > 24) log.removeChild(log.firstChild);
@@ -193,7 +200,10 @@
     const [cls, lvl, body] = lines[Math.floor(Math.random() * lines.length)];
     const div = document.createElement('div');
     div.className = 'line';
-    div.innerHTML = `<span class="ts">${ts}</span> <span class="${cls}">${lvl}</span> ${body}`;
+    const t = document.createElement('span'); t.className = 'ts'; t.textContent = ts;
+    const l = document.createElement('span'); l.className = cls; l.textContent = lvl;
+    const b = document.createTextNode(' ' + body);
+    div.append(t, document.createTextNode(' '), l, b);
     log.appendChild(div);
     while (log.children.length > 7) log.removeChild(log.firstChild);
   }, 2800);
