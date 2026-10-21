@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Console — Bob Agents</title>
+  <meta name="description" content="Bob Agents console: observe and govern your autonomous agents." />
+  <meta name="theme-color" content="#070b0f" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sb-brand">
+        <span class="brand-mark" style="border-color:var(--green);color:var(--green);width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--green);border-radius:3px;font-size:11px;">B</span>
+        <span>BOB<span style="color:var(--dim)">/</span>AGENTS</span>
+      </div>
+      <nav class="sb-nav">
+        <div class="sb-section">Workspace</div>
+        <a class="is-active" data-view="overview"><span class="ic">▸</span>Overview</a>
+        <a data-view="agents"><span class="ic"> </span>Agents</a>
+        <a data-view="runs"><span class="ic"> </span>Runs</a>
+        <a data-view="traces"><span class="ic"> </span>Traces</a>
+        <div class="sb-section">Platform</div>
+        <a data-view="tools"><span class="ic"> </span>Tools</a>
+        <a data-view="secrets"><span class="ic"> </span>Secrets</a>
+        <a data-view="settings"><span class="ic"> </span>Settings</a>
+      </nav>
+      <div class="sb-foot">
+        <div>env: <span class="green">production</span></div>
+        <div style="margin-top:4px;">region: us-east-1</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="app-main">
+      <div class="app-topbar">
+        <div class="crumb">bob <span class="sep">/</span> agents <span class="sep">/</span> <span class="cur" id="crumbCur">overview</span></div>
+        <div class="spacer"></div>
+        <div class="search">⌘K  search runs, agents…</div>
+        <span class="pill">prod</span>
+        <span class="pill" style="color:var(--green);border-color:var(--green);">● live</span>
+      </div>
+
+      <div class="app-content">
+        <!-- KPI row -->
+        <div class="kpi-row">
+          <div class="k"><div class="label">Running agents</div><div class="val green" id="cRunning">4</div><div class="delta">+1 vs 1h</div></div>
+          <div class="k"><div class="label">Tasks / hour</div><div class="val" id="cTasks">534</div><div class="delta">+12%</div></div>
+          <div class="k"><div class="label">Success rate</div><div class="val green">99.2%</div><div class="delta">+0.1%</div></div>
+          <div class="k"><div class="label">Cost / hour</div><div class="val">$4.21</div><div class="delta neg">+3%</div></div>
+        </div>
+
+        <div class="content-grid">
+          <!-- Left column -->
+          <div>
+            <!-- Agents table -->
+            <div class="panel" style="margin-bottom:12px;">
+              <div class="panel-head">
+                <span class="title">Agents</span>
+                <span class="meta" id="agentCount">5 agents · 4 running</span>
+                <div class="tabs">
+                  <button class="is-active">All</button>
+                  <button>Running</button>
+                  <button>Idle</button>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Status</th>
+                      <th>Runs</th>
+                      <th>p99</th>
+                      <th>Model</th>
+                      <th>Last run</th>
+                    </tr>
+                  </thead>
+                  <tbody id="agentTable">
+                    <tr><td class="name">triage-bot</td><td><span class="status running"><span class="dot"></span>running</span></td><td>4,210</td><td>1.1s</td><td class="muted-cell">gpt-4o</td><td class="muted-cell">2s ago</td></tr>
+                    <tr><td class="name">code-reviewer</td><td><span class="status running"><span class="dot"></span>running</span></td><td>1,892</td><td>4.3s</td><td class="muted-cell">claude-3.5</td><td class="muted-cell">8s ago</td></tr>
+                    <tr><td class="name">support-agent</td><td><span class="status running"><span class="dot"></span>running</span></td><td>3,104</td><td>0.9s</td><td class="muted-cell">gpt-4o-mini</td><td class="muted-cell">1s ago</td></tr>
+                    <tr><td class="name">deploy-watcher</td><td><span class="status idle"><span class="dot"></span>idle</span></td><td>612</td><td>2.0s</td><td class="muted-cell">gpt-4o-mini</td><td class="muted-cell">4m ago</td></tr>
+                    <tr><td class="name">data-pipeline</td><td><span class="status running"><span class="dot"></span>running</span></td><td>2,029</td><td>3.1s</td><td class="muted-cell">gpt-4o</td><td class="muted-cell">3s ago</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Run stream -->
+            <div class="panel">
+              <div class="panel-head">
+                <span class="title">Live run stream</span>
+                <span class="meta">auto-refresh 1s</span>
+              </div>
+              <div class="panel-body">
+                <div class="run-stream" id="runStream">
+                  <div class="rs-row"><span class="id">run_8f2a</span><span class="msg">triage-bot · classified 12 tickets</span><span class="agent">gpt-4o</span><span class="time">09:41:02</span></div>
+                  <div class="rs-row"><span class="id">run_9c1b</span><span class="msg">code-reviewer · opened PR #482</span><span class="agent">claude-3.5</span><span class="time">09:41:03</span></div>
+                  <div class="rs-row"><span class="id">run_4d7e</span><span class="msg">support-agent · resolved ticket #9912</span><span class="agent">gpt-4o-mini</span><span class="time">09:41:04</span></div>
+                  <div class="rs-row"><span class="id">run_2a9f</span><span class="msg">data-pipeline · synced 4,201 rows</span><span class="agent">gpt-4o</span><span class="time">09:41:07</span></div>
+                  <div class="rs-row"><span class="id">run_7b3c</span><span class="msg">deploy-watcher · checked 3 envs</span><span class="agent">gpt-4o-mini</span><span class="time">09:41:12</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column -->
+          <div>
+            <!-- Detail panel -->
+            <div class="panel" style="margin-bottom:12px;">
+              <div class="panel-head">
+                <span class="title">Agent detail</span>
+                <span class="meta">triage-bot</span>
+              </div>
+              <div class="panel-body">
+                <div class="detail-panel">
+                  <div class="dp-row"><span class="k">Status</span><span class="v green">running</span></div>
+                  <div class="dp-row"><span class="k">Model</span><span class="v">gpt-4o</span></div>
+                  <div class="dp-row"><span class="k">Runs (24h)</span><span class="v">4,210</span></div>
+                  <div class="dp-row"><span class="k">Success</span><span class="v green">99.4%</span></div>
+                  <div class="dp-row"><span class="k">Avg latency</span><span class="v">0.8s</span></div>
+                  <div class="dp-row"><span class="k">Cost (24h)</span><span class="v">$12.40</span></div>
+                  <div class="dp-section">Token budget</div>
+                  <div class="dp-row"><span class="k">Used</span><span class="v">312k / 500k</span></div>
+                  <div class="dp-bar"><span style="width:62.4%;"></span></div>
+                  <div class="dp-section">Tools</div>
+                  <div class="dp-row"><span class="k">classify_ticket</span><span class="v muted" style="color:var(--muted);">enabled</span></div>
+                  <div class="dp-row"><span class="k">reply_to_customer</span><span class="v" style="color:var(--muted);">enabled</span></div>
+                  <div class="dp-row"><span class="k">escalate_to_human</span><span class="v" style="color:var(--muted);">enabled</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Log tail -->
+            <div class="panel">
+              <div class="panel-head">
+                <span class="title">Log tail</span>
+                <span class="meta">triage-bot</span>
+              </div>
+              <div class="panel-body">
+                <div class="log-tail" id="logTail" style="height:260px;">
+                  <div class="l"><span class="ts">09:41:02</span> <span class="lvl ok">OK</span>  classified 12 tickets in 0.8s</div>
+                  <div class="l"><span class="ts">09:41:02</span> <span class="lvl info">INFO</span> tool=classify_ticket latency=120ms</div>
+                  <div class="l"><span class="ts">09:41:03</span> <span class="lvl info">INFO</span> tool=reply_to_customer latency=340ms</div>
+                  <div class="l"><span class="ts">09:41:04</span> <span class="lvl ok">OK</span>  resolved ticket #9912</div>
+                  <div class="l"><span class="ts">09:41:05</span> <span class="lvl warn">WARN</span> rate limit 80% on openai/gpt-4o</div>
+                  <div class="l"><span class="ts">09:41:06</span> <span class="lvl info">INFO</span> checkpoint saved run_8f2a</div>
+                  <div class="l"><span class="ts">09:41:07</span> <span class="lvl ok">OK</span>  data-pipeline synced 4,201 rows</div>
+                  <div class="l"><span class="ts">09:41:08</span> <span class="lvl info">INFO</span> deploy-watcher watching 3 envs</div>
+                  <div class="l"><span class="ts">09:41:09</span> <span class="lvl ok">OK</span>  code-reviewer opened PR #482</div>
+                  <div class="l"><span class="ts">09:41:10</span> <span class="lvl info">INFO</span> cost budget 62.4% used</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

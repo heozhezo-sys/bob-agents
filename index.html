@@ -3,477 +3,326 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Morning Field Coffee — Your Daily Ritual, Brewed Better</title>
-  <meta name="description" content="Morning Field Coffee is a neighborhood specialty café serving carefully sourced beans, freshly prepared drinks, and a warm place to gather. Visit us for espresso, lattes, cold brew, and more." />
-  <meta property="og:title" content="Morning Field Coffee — Your Daily Ritual, Brewed Better" />
-  <meta property="og:description" content="A neighborhood specialty café. Carefully sourced beans, freshly prepared drinks, and a warm place to gather." />
+  <title>Bob Agents — Orchestrate AI agents that ship</title>
+  <meta name="description" content="Bob Agents is the control plane for autonomous AI agents. Deploy, observe, and govern agents that take real action across your stack." />
+  <meta property="og:title" content="Bob Agents — Orchestrate AI agents that ship" />
+  <meta property="og:description" content="The control plane for autonomous AI agents. Deploy, observe, and govern." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#2B1D17" />
+  <meta name="theme-color" content="#070b0f" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="grid-bg">
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Navigation -->
-  <header class="site-header" id="siteHeader">
-    <div class="container nav-inner">
-      <a href="#home" class="brand" aria-label="Morning Field Coffee home">
-        <span class="brand-mark" aria-hidden="true">MF</span>
-        <span class="brand-name">Morning Field Coffee</span>
-      </a>
-      <nav class="primary-nav" aria-label="Primary">
-        <ul class="nav-list">
-          <li><a href="#home" class="nav-link is-active">Home</a></li>
-          <li><a href="#menu" class="nav-link">Menu</a></li>
-          <li><a href="#story" class="nav-link">Our Story</a></li>
-          <li><a href="#visit" class="nav-link">Visit Us</a></li>
-        </ul>
-      </nav>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" aria-pressed="false">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-      <a href="#visit" class="btn btn-primary btn-sm nav-cta">Find Us</a>
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-      <ul>
-        <li><a href="#home" class="mobile-link">Home</a></li>
-        <li><a href="#menu" class="mobile-link">Menu</a></li>
-        <li><a href="#story" class="mobile-link">Our Story</a></li>
-        <li><a href="#visit" class="mobile-link">Visit Us</a></li>
-      </ul>
-      <button class="theme-toggle theme-toggle-block" id="themeToggleMobile" aria-label="Toggle color theme" aria-pressed="false">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <span>Toggle theme</span>
-      </button>
-      <a href="#visit" class="btn btn-primary btn-block mobile-cta">Find Us</a>
-    </div>
+  <!-- Top bar -->
+  <header class="topbar">
+    <a href="#home" class="brand" aria-label="Bob Agents home">
+      <span class="brand-mark">B</span>
+      <span class="brand-name">BOB<span class="brand-slash">/</span>AGENTS</span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#how" class="nav-link">How it works</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="console.html" class="nav-link">Console</a>
+    </nav>
+    <div class="spacer"></div>
+    <span class="status-pill"><span class="dot"></span>all systems nominal</span>
+    <a href="console.html" class="cta">Launch console →</a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#features" class="mobile-link">Features</a>
+    <a href="#how" class="mobile-link">How it works</a>
+    <a href="#pricing" class="mobile-link">Pricing</a>
+    <a href="console.html" class="mobile-link">Console</a>
+    <a href="console.html" class="btn btn-primary btn-block mobile-cta">Launch console</a>
+  </div>
 
   <main id="main">
     <!-- Hero -->
     <section class="hero" id="home">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Est. 2019 · Specialty Coffee · Neighborhood Café</p>
-          <h1 class="hero-title">Your Daily Ritual,<br />Brewed Better.</h1>
+          <p class="eyebrow">v2.4.0 · control plane for autonomous agents</p>
+          <h1 class="hero-title">Orchestrate agents<br /><span class="accent">that ship.</span><span class="cursor"></span></h1>
           <p class="hero-text">
-            Carefully sourced beans, slow and precise brewing, and a warm room to
-            gather. From your first morning cup to a quiet afternoon pause,
-            Morning Field is here for the moments that matter.
+            Bob Agents is the control plane for autonomous AI agents. Deploy, observe,
+            and govern agents that take real action across your stack — with full traces,
+            guardrails, and a human in the loop.
           </p>
           <div class="hero-actions">
-            <a href="#menu" class="btn btn-primary">Explore Our Menu</a>
-            <a href="#visit" class="btn btn-ghost">Visit Our Café</a>
-            <button class="btn btn-ghost" id="quizOpen">Find Your Cup ✨</button>
+            <a href="console.html" class="btn btn-primary">Launch console</a>
+            <a href="#features" class="btn btn-ghost">See how it works</a>
+            <a href="https://github.com/heozhezo-sys/bob-agents" class="btn btn-ghost" target="_blank" rel="noopener">View on GitHub</a>
           </div>
-          <div class="hero-beans" aria-hidden="true" id="heroBeans"></div>
           <div class="hero-meta">
-            <span class="meta-item open-badge" id="openBadge"><span class="open-dot"></span><span class="open-text">Open now</span></span>
-            <span class="meta-item"><span class="meta-dot"></span>Open today 7:00 AM – 8:00 PM</span>
-            <span class="meta-item">Downtown · Walk-ins welcome</span>
+            <span class="meta-item open-badge"><span class="meta-dot"></span>all regions healthy</span>
+            <span class="meta-item"><span class="meta-dot"></span>p99 latency 1.2s</span>
+            <span class="meta-item">SOC2 · GDPR ready</span>
           </div>
         </div>
-        <div class="hero-media">
-          <div class="hero-image-wrap">
-            <img
-              src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=80"
-              alt="A freshly poured latte with delicate latte art on a wooden table"
-              loading="eager"
-              fetchpriority="high"
-              onerror="this.style.display='none'"
-            />
+
+        <!-- Console preview -->
+        <div class="console-preview reveal">
+          <div class="cp-bar">
+            <div class="dots"><span></span><span></span><span></span></div>
+            <span class="title">bob / agents / overview</span>
+            <span class="spacer"></span>
+            <span>live · 4 agents running</span>
           </div>
-          <div class="hero-badge" aria-hidden="true">
-            <span class="badge-label">Single Origin</span>
-            <span class="badge-value">Ethiopia Yirgacheffe</span>
+          <div class="cp-body">
+            <aside class="cp-side">
+              <div class="cp-section">Workspace</div>
+              <a class="is-active"><span class="ic">▸</span>Overview</a>
+              <a><span class="ic"> </span>Agents</a>
+              <a><span class="ic"> </span>Runs</a>
+              <a><span class="ic"> </span>Traces</a>
+              <div class="cp-section">Platform</div>
+              <a><span class="ic"> </span>Tools</a>
+              <a><span class="ic"> </span>Secrets</a>
+              <a><span class="ic"> </span>Settings</a>
+            </aside>
+            <div class="cp-main">
+              <div class="cp-kpi">
+                <div class="k"><div class="label">Running</div><div class="val green" id="kRunning">4</div></div>
+                <div class="k"><div class="label">Tasks / day</div><div class="val" id="kTasks">12,847</div></div>
+                <div class="k"><div class="label">Success</div><div class="val green">99.2%</div></div>
+                <div class="k"><div class="label">Cost / run</div><div class="val">$0.014</div></div>
+              </div>
+              <div class="cp-table">
+                <div class="t-head"><span>Agent</span><span>Status</span><span>Runs</span><span>p99</span><span>Last run</span></div>
+                <div class="t-row"><span class="agent"><span class="sq"></span>triage-bot</span><span class="status running"><span class="dot"></span>running</span><span>4,210</span><span>1.1s</span><span>2s ago</span></div>
+                <div class="t-row"><span class="agent"><span class="sq"></span>code-reviewer</span><span class="status running"><span class="dot"></span>running</span><span>1,892</span><span>4.3s</span><span>8s ago</span></div>
+                <div class="t-row"><span class="agent"><span class="sq"></span>support-agent</span><span class="status running"><span class="dot"></span>running</span><span>3,104</span><span>0.9s</span><span>1s ago</span></div>
+                <div class="t-row"><span class="agent"><span class="sq"></span>deploy-watcher</span><span class="status idle"><span class="dot"></span>idle</span><span>612</span><span>2.0s</span><span>4m ago</span></div>
+                <div class="t-row"><span class="agent"><span class="sq"></span>data-pipeline</span><span class="status running"><span class="dot"></span>running</span><span>2,029</span><span>3.1s</span><span>3s ago</span></div>
+              </div>
+              <div class="cp-log" id="cpLog">
+                <div class="line"><span class="ts">09:41:02</span> <span class="lvl-ok">OK</span> triage-bot classified 12 tickets in 0.8s</div>
+                <div class="line"><span class="ts">09:41:03</span> <span class="lvl-info">INFO</span> code-reviewer opened PR #482 on repo/acme</div>
+                <div class="line"><span class="ts">09:41:04</span> <span class="lvl-ok">OK</span> support-agent resolved ticket #9912</div>
+                <div class="line"><span class="ts">09:41:05</span> <span class="lvl-warn">WARN</span> rate limit 80% on openai/gpt-4o</div>
+                <div class="line"><span class="ts">09:41:06</span> <span class="lvl-info">INFO</span> deploy-watcher watching 3 environments</div>
+                <div class="line"><span class="ts">09:41:07</span> <span class="lvl-ok">OK</span> data-pipeline synced 4,201 rows</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Menu -->
-    <section class="section" id="menu">
+    <!-- Stats -->
+    <section class="section">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Signature Drinks</p>
-          <h2 class="section-title">Our Featured Menu</h2>
-          <p class="section-lead">
-            A short, considered menu of drinks we love to make. Every cup is
-            prepared to order with fresh ingredients and careful technique.
-          </p>
+          <p class="eyebrow">By the numbers</p>
+          <h2 class="section-title">Built for production workloads.</h2>
+          <p class="section-lead">Real numbers from teams running Bob Agents in production today.</p>
         </div>
-        <div class="menu-filters" role="tablist" aria-label="Filter menu">
-          <button class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true">All</button>
-          <button class="filter-btn" data-filter="hot" role="tab" aria-selected="false">Hot</button>
-          <button class="filter-btn" data-filter="iced" role="tab" aria-selected="false">Iced</button>
-          <button class="filter-btn" data-filter="specialty" role="tab" aria-selected="false">Specialty</button>
-        </div>
-        <div class="menu-grid">
-          <article class="menu-card reveal" data-category="hot">
-            <div class="menu-card-media">
-              <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=700&q=80" alt="A classic espresso shot in a small ceramic cup" loading="lazy" onerror="this.style.display='none'" />
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-row">
-                <h3 class="menu-name">Espresso</h3>
-                <span class="menu-price">₱120</span>
-              </div>
-              <p class="menu-desc">Rich, concentrated, and velvety. A single shot of our house blend pulled to perfection.</p>
-            </div>
-          </article>
-          <article class="menu-card reveal" data-category="specialty">
-            <div class="menu-card-media">
-              <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=700&q=80" alt="Creamy Spanish latte in a glass cup" loading="lazy" onerror="this.style.display='none'" />
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-row">
-                <h3 class="menu-name">Spanish Latte</h3>
-                <span class="menu-price">₱180</span>
-              </div>
-              <p class="menu-desc">Espresso, steamed milk, and a touch of sweetened condensed milk for a silky finish.</p>
-            </div>
-          </article>
-          <article class="menu-card reveal" data-category="iced">
-            <div class="menu-card-media">
-              <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80" alt="Iced caramel latte with whipped cream" loading="lazy" onerror="this.style.display='none'" />
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-row">
-                <h3 class="menu-name">Caramel Latte</h3>
-                <span class="menu-price">₱190</span>
-              </div>
-              <p class="menu-desc">Smooth espresso and milk layered with house-made caramel and a hint of sea salt.</p>
-            </div>
-          </article>
-          <article class="menu-card reveal" data-category="iced">
-            <div class="menu-card-media">
-              <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=700&q=80" alt="Cold brew coffee served over ice in a tall glass" loading="lazy" onerror="this.style.display='none'" />
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-row">
-                <h3 class="menu-name">Cold Brew</h3>
-                <span class="menu-price">₱170</span>
-              </div>
-              <p class="menu-desc">Slow-steeped for eighteen hours. Smooth, low-acid, and refreshing over ice.</p>
-            </div>
-          </article>
-          <article class="menu-card reveal" data-category="hot">
-            <div class="menu-card-media">
-              <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=700&q=80" alt="Cappuccino with classic foam art" loading="lazy" onerror="this.style.display='none'" />
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-row">
-                <h3 class="menu-name">Cappuccino</h3>
-                <span class="menu-price">₱160</span>
-              </div>
-              <p class="menu-desc">Equal parts espresso, steamed milk, and airy foam. Simple and timeless.</p>
-            </div>
-          </article>
-          <article class="menu-card reveal" data-category="specialty">
-            <div class="menu-card-media">
-              <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=700&q=80" alt="Iced matcha latte with a creamy green swirl" loading="lazy" onerror="this.style.display='none'" />
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-row">
-                <h3 class="menu-name">Matcha Latte</h3>
-                <span class="menu-price">₱185</span>
-              </div>
-              <p class="menu-desc">Ceremonial-grade matcha whisked with milk. Earthy, creamy, and gently sweet.</p>
-            </div>
-          </article>
-        </div>
-        <p class="menu-note">Prices are sample placeholders and may vary by size and location.</p>
-      </div>
-    </section>
-
-    <!-- Story -->
-    <section class="section section-alt" id="story">
-      <div class="container story-grid">
-        <div class="story-media reveal">
-          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80" alt="Barista preparing coffee behind a café counter" loading="lazy" onerror="this.style.display='none'" />
-        </div>
-        <div class="story-copy reveal">
-          <p class="eyebrow">Our Story</p>
-          <h2 class="section-title">Coffee, considered.</h2>
-          <p>
-            Morning Field began with a simple idea: a cup of coffee should feel
-            like a small, reliable pleasure. We partner with growers who care
-            about their craft, roast in small batches, and brew with attention to
-            detail.
-          </p>
-          <p>
-            More than a café, we are a neighborhood room. A place to start the
-            day, meet a friend, or sit quietly with a book. Every drink is made
-            with the same care, whether it is your first visit or your hundredth.
-          </p>
-          <a href="#visit" class="text-link">Discover Our Story <span aria-hidden="true">→</span></a>
+        <div class="stats-row">
+          <div class="s"><div class="v">12.8M</div><div class="l">Tasks executed</div></div>
+          <div class="s"><div class="v">99.97%</div><div class="l">Uptime (90d)</div></div>
+          <div class="s"><div class="v">1.2s</div><div class="l">Median p99 latency</div></div>
+          <div class="s"><div class="v">340+</div><div class="l">Teams in production</div></div>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="section" id="why">
+    <!-- Features -->
+    <section class="section section-alt" id="features">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Why Morning Field</p>
-          <h2 class="section-title">Made with care, served with warmth.</h2>
+          <p class="eyebrow">Features</p>
+          <h2 class="section-title">Everything an agent needs to ship.</h2>
+          <p class="section-lead">From a single prompt to a fleet of autonomous workers — Bob Agents gives you the primitives to build, run, and trust.</p>
         </div>
-        <div class="why-grid">
-          <div class="why-card reveal">
-            <div class="why-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.3 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8z"/></svg>
-            </div>
-            <h3>Carefully selected beans</h3>
-            <p>We source from trusted farms and roast in small batches to highlight each bean's character.</p>
+        <div class="features-grid">
+          <div class="feature reveal">
+            <div class="ic">A</div>
+            <h3>Agent runtime</h3>
+            <p>Sandboxed execution with retries, timeouts, and checkpointing. Agents survive crashes and resume mid-task.</p>
           </div>
-          <div class="why-card reveal">
-            <div class="why-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
-            </div>
-            <h3>Freshly prepared drinks</h3>
-            <p>Every cup is made to order with fresh ingredients and precise, consistent technique.</p>
+          <div class="feature reveal">
+            <div class="ic">T</div>
+            <h3>Tool registry</h3>
+            <p>Register HTTP, SQL, and custom tools with typed schemas. Agents discover and call them safely.</p>
           </div>
-          <div class="why-card reveal">
-            <div class="why-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 11a8 8 0 0 1 16 0v2a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M8 21h8"/></svg>
-            </div>
-            <h3>Welcoming atmosphere</h3>
-            <p>A calm, friendly space designed for conversation, focus, and quiet moments.</p>
+          <div class="feature reveal">
+            <div class="ic">O</div>
+            <h3>Full observability</h3>
+            <p>Every run is a trace: prompts, tool calls, tokens, cost, latency. Searchable, replayable, exportable.</p>
           </div>
-          <div class="why-card reveal">
-            <div class="why-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
-            </div>
-            <h3>A place to stay</h3>
-            <p>Comfortable seating, reliable Wi-Fi, and an easy pace for work, study, or meeting friends.</p>
+          <div class="feature reveal">
+            <div class="ic">G</div>
+            <h3>Guardrails</h3>
+            <p>Policy engine for allow/deny lists, PII redaction, and approval gates before destructive actions.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="ic">H</div>
+            <h3>Human in the loop</h3>
+            <p>Pause any run for review. Approve, edit, or reject agent actions from the console or Slack.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="ic">M</div>
+            <h3>Multi-model</h3>
+            <p>Route across OpenAI, Anthropic, and open models. Fallbacks, cost caps, and A/B evals built in.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Gallery -->
-    <section class="section section-alt" id="gallery">
+    <!-- How it works -->
+    <section class="section" id="how">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">The Café</p>
-          <h2 class="section-title">Atmosphere &amp; craft</h2>
+          <p class="eyebrow">How it works</p>
+          <h2 class="section-title">Define. Deploy. Observe.</h2>
+          <p class="section-lead">Three steps from idea to production agent.</p>
         </div>
-        <div class="gallery-grid">
-          <figure class="gallery-item gallery-large reveal">
-            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80" alt="Barista pouring a latte with precise technique" loading="lazy" onerror="this.style.display='none'" />
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7c46?auto=format&fit=crop&w=700&q=80" alt="Roasted coffee beans in a wooden bowl" loading="lazy" onerror="this.style.display='none'" />
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=700&q=80" alt="Warm café interior with wooden tables and soft light" loading="lazy" onerror="this.style.display='none'" />
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=700&q=80" alt="Friends enjoying coffee together at a café table" loading="lazy" onerror="this.style.display='none'" />
-          </figure>
-          <figure class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=700&q=80" alt="Close-up of a cup of coffee with latte art" loading="lazy" onerror="this.style.display='none'" />
-          </figure>
+        <div class="steps">
+          <div class="step">
+            <div class="num">01 / DEFINE</div>
+            <h3>Write your agent</h3>
+            <p>Describe goals, tools, and guardrails in YAML or code. Version control it like any service.</p>
+          </div>
+          <div class="step">
+            <div class="num">02 / DEPLOY</div>
+            <h3>Ship to the runtime</h3>
+            <p>One command deploys to Bob's managed runtime. Autoscales from zero to thousands of concurrent runs.</p>
+          </div>
+          <div class="step">
+            <div class="num">03 / OBSERVE</div>
+            <h3>Watch it work</h3>
+            <p>Live traces, cost dashboards, and alerting. Replay any run. Tune prompts without redeploying.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="section" id="testimonials">
+    <!-- Pricing -->
+    <section class="section section-alt" id="pricing">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Kind Words</p>
-          <h2 class="section-title">Loved by our neighbors</h2>
+          <p class="eyebrow">Pricing</p>
+          <h2 class="section-title">Simple, usage-based.</h2>
+          <p class="section-lead">Start free. Pay for what your agents actually do.</p>
         </div>
-        <div class="testimonial-carousel" id="testimonialCarousel" aria-roledescription="carousel">
-          <div class="carousel-track">
-            <blockquote class="testimonial" data-index="0">
-              <p>“The Spanish latte is my morning anchor. The space is calm, the staff remembers your order, and the coffee is consistently excellent.”</p>
-              <footer>
-                <span class="t-name">Mika R.</span>
-                <span class="t-role">Regular customer</span>
-              </footer>
-            </blockquote>
-            <blockquote class="testimonial" data-index="1">
-              <p>“A genuinely warm café. Great Wi-Fi, comfortable seats, and a cold brew that keeps me coming back every afternoon.”</p>
-              <footer>
-                <span class="t-name">Daniel T.</span>
-                <span class="t-role">Freelance designer</span>
-              </footer>
-            </blockquote>
-            <blockquote class="testimonial" data-index="2">
-              <p>“Quiet, thoughtful, and beautifully run. The matcha latte is the best I've had in the neighborhood.”</p>
-              <footer>
-                <span class="t-name">Sofia L.</span>
-                <span class="t-role">Local resident</span>
-              </footer>
-            </blockquote>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="tier">Hobby</div>
+            <div class="amount"><span class="cur">$</span>0</div>
+            <div class="period">forever</div>
+            <div class="desc">For experiments and side projects.</div>
+            <ul>
+              <li>1 agent</li>
+              <li>1,000 runs / month</li>
+              <li>Community support</li>
+              <li class="off">Guardrails</li>
+              <li class="off">SSO</li>
+            </ul>
+            <a href="console.html" class="btn">Get started</a>
           </div>
-          <div class="carousel-controls">
-            <button class="carousel-btn" id="prevTestimonial" aria-label="Previous testimonial">‹</button>
-            <div class="carousel-dots" id="testimonialDots" role="tablist" aria-label="Testimonial slides"></div>
-            <button class="carousel-btn" id="nextTestimonial" aria-label="Next testimonial">›</button>
+          <div class="price-card featured">
+            <div class="tier">Pro</div>
+            <div class="amount"><span class="cur">$</span>49</div>
+            <div class="period">per month + usage</div>
+            <div class="desc">For teams shipping agents to production.</div>
+            <ul>
+              <li>Unlimited agents</li>
+              <li>100k runs / month</li>
+              <li>Guardrails + HITL</li>
+              <li>Slack approvals</li>
+              <li class="off">SSO</li>
+            </ul>
+            <a href="console.html" class="btn btn-primary">Start trial</a>
           </div>
-        </div>
-        <p class="testimonials-note">Sample testimonials for demonstration. Replace with real reviews when available.</p>
-      </div>
-    </section>
-
-    <!-- Visit -->
-    <section class="section section-alt" id="visit">
-      <div class="container visit-grid">
-        <div class="visit-copy reveal">
-          <p class="eyebrow">Visit Us</p>
-          <h2 class="section-title">Come say hello.</h2>
-          <p class="section-lead">
-            We are a small neighborhood café. Stop by for a cup, stay for the
-            atmosphere, and leave feeling a little more grounded.
-          </p>
-          <dl class="visit-details">
-            <div class="detail">
-              <dt>Address</dt>
-              <dd>[Insert café address here]</dd>
-            </div>
-            <div class="detail">
-              <dt>Hours</dt>
-              <dd>Mon – Fri: 7:00 AM – 8:00 PM<br />Sat – Sun: 8:00 AM – 9:00 PM</dd>
-            </div>
-            <div class="detail">
-              <dt>Phone</dt>
-              <dd><a href="tel:+0000000000">[Insert phone number]</a></dd>
-            </div>
-            <div class="detail">
-              <dt>Email</dt>
-              <dd><a href="mailto:hello@morningfieldcoffee.com">[Insert email address]</a></dd>
-            </div>
-            <div class="detail">
-              <dt>Social</dt>
-              <dd>
-                <a href="#" aria-label="Instagram">Instagram</a> ·
-                <a href="#" aria-label="Facebook">Facebook</a> ·
-                <a href="#" aria-label="TikTok">TikTok</a>
-              </dd>
-            </div>
-          </dl>
-          <div class="visit-actions">
-            <a href="https://maps.app.goo.gl/oGp53zK1P8b2TLFn6" class="btn btn-primary" target="_blank" rel="noopener">Get Directions</a>
-            <a href="#menu" class="btn btn-ghost">View Menu</a>
-          </div>
-        </div>
-        <div class="visit-map reveal">
-          <div class="map-card">
-            <iframe
-              class="map-embed"
-              title="Café location on Google Maps"
-              src="https://www.google.com/maps?q=10.3032726,123.9016997&z=16&output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
-            <p class="map-caption">Map: Third Wave Coffee Cebu – Bloq Cafe area. Replace with your exact pin if needed.</p>
+          <div class="price-card">
+            <div class="tier">Enterprise</div>
+            <div class="amount"><span class="cur">$</span>Custom</div>
+            <div class="period">annual contract</div>
+            <div class="desc">For regulated and high-volume workloads.</div>
+            <ul>
+              <li>Unlimited runs</li>
+              <li>SSO / SAML</li>
+              <li>Dedicated runtime</li>
+              <li>SLA + support</li>
+              <li>Audit logs</li>
+            </ul>
+            <a href="mailto:hello@bobagents.dev" class="btn">Contact sales</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Newsletter -->
-    <section class="section newsletter-section" id="newsletter">
-      <div class="container newsletter-inner">
-        <div class="newsletter-copy">
-          <p class="eyebrow">Stay in the loop</p>
-          <h2 class="section-title">Fresh drops, events, and brew tips.</h2>
-          <p class="section-lead">Join our list for new seasonal drinks, cupping events, and a little coffee wisdom. No spam, ever.</p>
+    <!-- Quote -->
+    <section class="section">
+      <div class="container container-narrow">
+        <div class="quote-block">
+          <p>"Bob Agents gave us the missing layer: we could finally see what our agents were doing, gate the dangerous actions, and ship with confidence."</p>
+          <div class="attr">— Eng Lead, Series B fintech (340+ agents in production)</div>
         </div>
-        <form class="newsletter-form" id="newsletterForm" novalidate>
-          <label for="newsletterEmail" class="sr-only">Email address</label>
-          <input type="email" id="newsletterEmail" name="email" placeholder="you@example.com" required aria-describedby="newsletterMsg" />
-          <button type="submit" class="btn btn-primary">Subscribe</button>
-          <p class="newsletter-msg" id="newsletterMsg" role="status" aria-live="polite"></p>
-        </form>
       </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final-cta">
-      <div class="container final-cta-inner">
-        <h2 class="final-title">Ready for your next cup?</h2>
-        <p>Stop by Morning Field Coffee and enjoy a freshly brewed cup made with care.</p>
-        <a href="#visit" class="btn btn-primary btn-lg">Plan Your Visit</a>
+    <!-- CTA -->
+    <section class="cta-band">
+      <div class="container">
+        <h2>Ready to ship your first agent?</h2>
+        <p>Deploy in minutes. Observe everything. Govern what matters.</p>
+        <a href="console.html" class="btn btn-primary btn-lg">Launch console →</a>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <span class="brand-mark" aria-hidden="true">MF</span>
-        <span class="brand-name">Morning Field Coffee</span>
-        <p class="footer-desc">A neighborhood specialty café. Carefully sourced beans, freshly prepared drinks, and a warm place to gather.</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand"><span class="brand-mark">B</span><span class="brand-name">BOB<span class="brand-slash">/</span>AGENTS</span></div>
+          <p>The control plane for autonomous AI agents. Deploy, observe, and govern.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="console.html">Console</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">API reference</a></li>
+            <li><a href="#">Status</a></li>
+            <li><a href="https://github.com/heozhezo-sys/bob-agents">GitHub</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="mailto:hello@bobagents.dev">Contact</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#story">Our Story</a></li>
-          <li><a href="#visit">Visit Us</a></li>
-        </ul>
+      <div class="container footer-bottom">
+        <p>© <span id="year"></span> Bob Agents. All rights reserved.</p>
+        <p>v2.4.0 · all systems nominal</p>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:hello@morningfieldcoffee.com">hello@morningfieldcoffee.com</a></li>
-          <li><a href="tel:+0000000000">[Insert phone number]</a></li>
-          <li><a href="#visit">[Insert address]</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Follow</h4>
-        <ul>
-          <li><a href="#" aria-label="Instagram">Instagram</a></li>
-          <li><a href="#" aria-label="Facebook">Facebook</a></li>
-          <li><a href="#" aria-label="TikTok">TikTok</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>&copy; <span id="year"></span> Morning Field Coffee. All rights reserved.</p>
-      <p class="footer-small">Sample content — replace placeholders before publishing.</p>
     </div>
   </footer>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close image preview">×</button>
-    <img class="lightbox-img" id="lightboxImg" alt="" />
-    <p class="lightbox-caption" id="lightboxCaption"></p>
-  </div>
-
-  <!-- Back to top -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-
-  <!-- Drink quiz modal -->
-  <div class="quiz-modal" id="quizModal" aria-hidden="true" role="dialog" aria-label="Find your perfect cup">
-    <div class="quiz-card">
-      <button class="quiz-close" id="quizClose" aria-label="Close quiz">×</button>
-      <p class="eyebrow">Coffee Quiz</p>
-      <h2 class="section-title" id="quizTitle">Find your perfect cup</h2>
-      <div id="quizBody"></div>
-    </div>
-  </div>
-
-  <!-- Secret toast -->
-  <div class="secret-toast" id="secretToast" aria-live="polite"></div>
 
   <script src="app.js" defer></script>
 </body>
