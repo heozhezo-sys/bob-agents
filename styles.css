@@ -797,7 +797,30 @@ img { max-width: 100%; display: block; }
 .reveal { opacity: 0; transform: translateY(8px); transition: opacity 140ms linear, transform 140ms linear; }
 .reveal.in { opacity: 1; transform: none; }
 
-/* ---------- misc ---------- */
+/* ---------- secret toast ---------- */
+.secret-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--panel);
+  border: 1px solid var(--green);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 10px 16px;
+  border-radius: var(--r);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms linear, transform 140ms linear;
+  z-index: 100;
+  max-width: 90vw;
+  text-align: center;
+}
+.secret-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 .skip-link { position: absolute; left: -9999px; }
 .skip-link:focus { left: 8px; top: 8px; background: var(--panel); padding: 6px; z-index: 100; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }

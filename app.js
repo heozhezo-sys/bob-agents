@@ -185,6 +185,73 @@
   }, 2000);
 })();
 
+/* Secret toast + Konami easter egg */
+(function () {
+  const toast = document.getElementById('secretToast');
+  if (!toast) return;
+  const show = (msg) => {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 3200);
+  };
+
+  // Konami code
+  const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let buf = [];
+  window.addEventListener('keydown', (e) => {
+    buf.push(e.key);
+    if (buf.length > seq.length) buf.shift();
+    if (buf.join(',') === seq.join(',')) {
+      buf = [];
+      show('🎉 Secret agent unlocked: you found the Konami code.');
+      matrixRain();
+    }
+    // "/" opens a tiny command hint
+    if (e.key === '/' && !e.metaKey && !e.ctrlKey) {
+      const t = document.activeElement && document.activeElement.tagName;
+      if (t !== 'INPUT' && t !== 'TEXTAREA') {
+        e.preventDefault();
+        show('Tip: press ↑↑↓↓←→←→ B A for a surprise.');
+      }
+    }
+  });
+
+  function matrixRain() {
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.inset = '0';
+    canvas.style.zIndex = '9999';
+    canvas.style.pointerEvents = 'none';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    const cols = Math.floor(canvas.width / 16);
+    const drops = Array.from({ length: cols }, () => Math.random() * canvas.height);
+    const chars = 'BOB/AGENTS01'.split('');
+    let frames = 0;
+    const id = setInterval(() => {
+      ctx.fillStyle = 'rgba(7,11,15,0.12)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#4ade80';
+      ctx.font = '14px "JetBrains Mono", monospace';
+      for (let i = 0; i < cols; i++) {
+        const c = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(c, i * 16, drops[i]);
+        drops[i] += 16;
+        if (drops[i] > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      }
+      frames++;
+      if (frames > 90) {
+        clearInterval(id);
+        canvas.style.transition = 'opacity 400ms linear';
+        canvas.style.opacity = '0';
+        setTimeout(() => canvas.remove(), 450);
+      }
+    }, 40);
+  }
+})();
 /* CP log on landing append */
 (function () {
   const log = document.getElementById('cpLog');
