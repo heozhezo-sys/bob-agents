@@ -6,6 +6,59 @@
   if (y) y.textContent = new Date().getFullYear();
 })();
 
+/* Hero parallax + scroll effects + mouse follow */
+(function () {
+  const hero = document.getElementById('home');
+  const consolePreview = document.querySelector('.console-preview');
+  const heroCopy = document.querySelector('.hero-copy');
+  if (!hero || !consolePreview) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+
+  function onScroll() {
+    if (prefersReduced) return;
+    const rect = hero.getBoundingClientRect();
+    const vpHeight = window.innerHeight;
+    if (rect.bottom <= 0 || rect.top >= vpHeight) return;
+
+    const progress = 1 - Math.max(0, Math.min(1, rect.bottom / (rect.height + vpHeight)));
+    consolePreview.style.transform = `translateY(${progress * 40}px) translateX(${currentX}px) translateY(${currentY}px)`;
+    if (heroCopy) {
+      heroCopy.style.opacity = 1 - progress * 0.15;
+    }
+    hero.style.backgroundPositionY = `${progress * 100}px`;
+  }
+
+  function onMouseMove(e) {
+    if (prefersReduced) return;
+    const rect = hero.getBoundingClientRect();
+    if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX = (e.clientX - centerX) / 30; // max ~16px
+    mouseY = (e.clientY - centerY) / 30;
+  }
+
+  function animate() {
+    if (prefersReduced) return;
+    currentX += (mouseX - currentX) * 0.1;
+    currentY += (mouseY - currentY) * 0.1;
+    if (Math.abs(currentX) > 0.1 || Math.abs(currentY) > 0.1) {
+      consolePreview.style.transform = `translateY(${currentY}px) translateX(${currentX}px)`;
+    }
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  hero.addEventListener('mousemove', onMouseMove, { passive: true });
+  hero.addEventListener('mouseleave', () => { mouseX = 0; mouseY = 0; });
+  animate();
+  onScroll();
+})();
+
 /* Scroll progress */
 (function () {
   const bar = document.getElementById('scrollProgress');
