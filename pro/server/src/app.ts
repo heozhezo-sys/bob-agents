@@ -9,6 +9,8 @@ import { one } from "./db/index.js";
 import { AppError } from "./lib/errors.js";
 import { authRouter } from "./routes/auth.js";
 import { projectsRouter } from "./routes/projects.js";
+import { clipsRouter } from "./routes/clips.js";
+import { rendersRouter } from "./routes/renders.js";
 import { mediaRouter } from "./routes/media.js";
 
 export function createApp() {
@@ -55,8 +57,10 @@ export function createApp() {
   });
 
   app.use("/api/auth", authRouter);
+  app.use("/api/projects", clipsRouter);
   app.use("/api/projects", projectsRouter);
   app.use("/api/assets", mediaRouter);
+  app.use("/api", rendersRouter);
 
   const clientDist = path.join(config.projectRoot, "client", "dist");
   const indexHtml = path.join(clientDist, "index.html");

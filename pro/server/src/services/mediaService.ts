@@ -79,12 +79,14 @@ export async function ingestUpload(options: IngestOptions): Promise<MediaRow> {
     let kind: "video" | "audio" | "image" | "subtitle";
     if (sniff.kind === "subtitle") {
       kind = "subtitle";
+    } else if (sniff.kind === "image") {
+      // ffprobe exposes a still image as a single-frame video stream, so the
+      // sniffed container type wins here. Otherwise PNG/JPG become 0ms videos.
+      kind = "image";
     } else if (probe?.hasVideo) {
       kind = "video";
     } else if (probe?.hasAudio) {
       kind = "audio";
-    } else if (sniff.kind === "image") {
-      kind = "image";
     } else {
       throw new AppError(415, "unsupported_media", "No usable video or audio stream found.");
     }

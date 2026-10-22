@@ -2,11 +2,13 @@ import { config, ensureDataDirs } from "./config.js";
 import { closeDb, initDb } from "./db/index.js";
 import { ensureOwnerAccount } from "./lib/auth.js";
 import { createApp } from "./app.js";
+import { recoverRenderJobs } from "./services/renderService.js";
 
 function main(): void {
   ensureDataDirs();
   initDb();
   ensureOwnerAccount((message) => console.log(message));
+  recoverRenderJobs();
 
   const app = createApp();
   const server = app.listen(config.port, config.host, () => {

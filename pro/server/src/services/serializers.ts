@@ -80,7 +80,7 @@ export function serializeClip(row: ClipRow): Clip {
     id: row.id,
     trackId: row.track_id,
     assetId: row.asset_id,
-    kind: row.kind as TrackKind,
+    kind: row.kind as Clip["kind"],
     startMs: row.start_ms,
     durationMs: row.duration_ms,
     inMs: row.in_ms,
@@ -159,6 +159,7 @@ export function serializeProject(row: ProjectRow): Project {
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     assetCount: assets.length,
+    durationMs: projectDurationMs(row.id),
     coverUrl: cover ? `/api/assets/${cover.id}/thumbnail` : null,
   };
 }

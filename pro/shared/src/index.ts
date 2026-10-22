@@ -22,6 +22,7 @@ export interface Project {
   createdAt: string;
   updatedAt: string;
   assetCount: number;
+  durationMs: number;
   coverUrl: string | null;
 }
 
@@ -47,12 +48,13 @@ export interface MediaAsset {
 }
 
 export type TrackKind = "video" | "audio" | "text" | "subtitle" | "overlay";
+export type ClipKind = "video" | "audio" | "image" | "text" | "subtitle" | "overlay";
 
 export interface Clip {
   id: string;
   trackId: string;
   assetId: string | null;
-  kind: TrackKind;
+  kind: ClipKind;
   startMs: number;
   durationMs: number;
   inMs: number;
@@ -84,6 +86,22 @@ export interface ProjectDetail extends Project {
   durationMs: number;
 }
 
+export type RenderStatus = "queued" | "running" | "succeeded" | "failed" | "cancelled";
+
+export interface RenderJob {
+  id: string;
+  projectId: string;
+  projectName?: string;
+  status: RenderStatus;
+  progress: number;
+  error: string | null;
+  createdAt: string;
+  startedAt: string | null;
+  finishedAt: string | null;
+  fileUrl: string | null;
+  downloadUrl: string | null;
+}
+
 export interface ApiErrorBody {
   error: {
     code: string;
@@ -109,6 +127,35 @@ export const updateProjectSchema = z.object({
 });
 
 export type UpdateProjectInput = z.infer<typeof updateProjectSchema>;
+
+export const updateClipSchema = z
+  .object({
+    startMs: z.number().int().min(0).max(6 * 60 * 60 * 1000).optional(),
+    durationMs: z.number().int().min(100).max(6 * 60 * 60 * 1000).optional(),
+    inMs: z.number().int().min(0).max(6 * 60 * 60 * 1000).optional(),
+    trackId: z.string().uuid().optional(),
+  })
+  .refine((value) => Object.keys(value).length > 0, {
+    message: "Provide at least one clip field to update",
+  });
+
+export type UpdateClipInput = z.infer<typeof updateClipSchema>;
+
+export const splitClipSchema = z.object({
+  atMs: z.number().int().min(0).max(6 * 60 * 60 * 1000),
+});
+
+export type SplitClipInput = z.infer<typeof splitClipSchema>;
+
+export const createClipSchema = z.object({
+  assetId: z.string().uuid(),
+  trackId: z.string().uuid().optional(),
+  startMs: z.number().int().min(0).max(6 * 60 * 60 * 1000).optional(),
+});
+
+export type CreateClipInput = z.infer<typeof createClipSchema>;
+
+export const CLIP_MIN_DURATION_MS = 100;
 
 export const loginSchema = z.object({
   password: z.string().min(1).max(500),
