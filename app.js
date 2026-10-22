@@ -162,6 +162,66 @@
   }
 })();
 
+/* Hero accent text rotation prototype */
+(function () {
+  const accentEl = document.getElementById('accentText');
+  if (!accentEl) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+  // Prototype phrases to cycle through
+  const phrases = [
+    'that ship.',
+    'that scale.',
+    'that adapt.',
+    'that learn.',
+    'that deliver.',
+    'that ship.'
+  ];
+
+  let currentIndex = 0;
+  let isAnimating = false;
+
+  function rotateText() {
+    if (isAnimating || prefersReduced) return;
+    isAnimating = true;
+
+    const nextIndex = (currentIndex + 1) % phrases.length;
+    const nextPhrase = phrases[nextIndex];
+
+    // Fade out
+    accentEl.style.transition = 'opacity 200ms ease, transform 200ms ease';
+    accentEl.style.opacity = '0';
+    accentEl.style.transform = 'translateY(-10px)';
+
+    setTimeout(() => {
+      // Swap text
+      accentEl.textContent = nextPhrase;
+      currentIndex = nextIndex;
+
+      // Fade in from below
+      accentEl.style.transform = 'translateY(10px)';
+      requestAnimationFrame(() => {
+        accentEl.style.opacity = '1';
+        accentEl.style.transform = 'translateY(0)';
+      });
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 200);
+    }, 200);
+  }
+
+  // Start rotation after initial animations complete
+  setTimeout(() => {
+    if (!prefersReduced) {
+      const interval = setInterval(rotateText, 3500);
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', () => clearInterval(interval));
+    }
+  }, 2000);
+})();
+
 /* Mobile menu */
 (function () {
   const toggle = document.getElementById('menuToggle');
