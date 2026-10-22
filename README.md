@@ -2,6 +2,12 @@
 
 The control plane for autonomous AI agents. Deploy, observe, and govern agents that take real action across your stack.
 
+![Bob Agents landing page](./screenshot.png)
+
+## Console
+
+![Bob Agents console](./screenshot-console.png)
+
 ## Features
 
 - **Agent runtime** — sandboxed execution with retries, timeouts, checkpointing.
