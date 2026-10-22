@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
+import path from "node:path";
 import { Router } from "express";
 import multer from "multer";
 import rateLimit from "express-rate-limit";
@@ -152,6 +153,7 @@ projectsRouter.delete("/:id", requireAuth, requireCsrf, async (req, res) => {
   for (const asset of assets) {
     await deleteAssetFiles(asset);
   }
+  await fs.rm(path.join(paths.renders, project.id), { recursive: true, force: true });
   mutate("DELETE FROM projects WHERE id = ?", project.id);
   audit(req.auth!.user.id, "project.delete", "project", project.id, {
     name: project.name,
