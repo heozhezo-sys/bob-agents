@@ -137,6 +137,7 @@ async function main() {
     });
     check("browser decodes the uploaded MP4", !media.error && media.duration > 3.5, JSON.stringify(media));
 
+    await page.locator(".ruler").scrollIntoViewIfNeeded();
     const rulerBox = await page.locator(".ruler").boundingBox();
     if (rulerBox) {
       await page.mouse.click(rulerBox.x + 64, rulerBox.y + rulerBox.height / 2);
@@ -187,6 +188,7 @@ async function main() {
       );
 
     const clip = page.locator(".clip").first();
+    await clip.scrollIntoViewIfNeeded();
     const clipBox = await clip.boundingBox();
     console.log("CLIPBOX", JSON.stringify(clipBox));
     if (!clipBox) throw new Error("Clip is not measurable");
@@ -210,7 +212,9 @@ async function main() {
     check("dragged clip is drawn one second later", true);
 
     await clip.click();
-    const trimBox = await page.locator(".clip.selected .clip-trim-end").boundingBox();
+    const trimHandle = page.locator(".clip.selected .clip-trim-end");
+    await trimHandle.scrollIntoViewIfNeeded();
+    const trimBox = await trimHandle.boundingBox();
     if (!trimBox) throw new Error("Trim handle is not measurable");
     const trimResponse = waitForClipPatch();
     await page.mouse.move(trimBox.x + 3, trimBox.y + trimBox.height / 2);
@@ -223,6 +227,7 @@ async function main() {
     const lengthValue = await page.locator('.clip-field input[aria-label="Clip length in seconds"]').inputValue();
     check("trimmed clip is three seconds long", lengthValue === "3.00", lengthValue);
 
+    await page.locator(".ruler").scrollIntoViewIfNeeded();
     const ruler = await page.locator(".ruler").boundingBox();
     if (!ruler) throw new Error("Ruler is not measurable");
     await page.mouse.click(ruler.x + 2.5 * 64, ruler.y + ruler.height / 2);
