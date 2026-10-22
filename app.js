@@ -96,6 +96,72 @@
   els.forEach((el) => io.observe(el));
 })();
 
+/* Stats row: scroll reveal + counter animation */
+(function () {
+  const statsRow = document.querySelector('.stats-row');
+  if (!statsRow) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        statsRow.classList.add('in-view');
+        // Trigger counter animations
+        const values = statsRow.querySelectorAll('.s .v');
+        const targets = [
+          { val: 12800000, suffix: '', label: 'Tasks executed', decimals: 0 },    // 12.8M
+          { val: 99.97, suffix: '%', label: 'Uptime (90d)', decimals: 2 },
+          { val: 1.2, suffix: 's', label: 'Median p99 latency', decimals: 1 },
+          { val: 340, suffix: '+', label: 'Teams in production', decimals: 0 }
+        ];
+        values.forEach((el, i) => {
+          const target = targets[i];
+          if (!target) return;
+          animateCounter(el, target);
+        });
+        io.unobserve(statsRow);
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '0px 0px -50px 0px' });
+
+  io.observe(statsRow);
+
+  function animateCounter(el, { val, suffix, decimals }) {
+    if (prefersReduced) {
+      el.textContent = formatNumber(val, decimals) + suffix;
+      return;
+    }
+    el.classList.add('counting');
+    const duration = 1800;
+    const start = performance.now();
+    const startVal = 0;
+    
+    function tick(now) {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      const current = startVal + (val - startVal) * eased;
+      el.textContent = formatNumber(current, decimals) + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.classList.remove('counting');
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function formatNumber(num, decimals) {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(decimals) + 'M';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(decimals) + 'K';
+    }
+    return num.toFixed(decimals);
+  }
+})();
+
 /* Mobile menu */
 (function () {
   const toggle = document.getElementById('menuToggle');
