@@ -21,7 +21,7 @@ import { clockLabel } from "../lib/format";
 const MILESTONES = [
   { label: "Upload, probe & source preview", state: "live" },
   { label: "Persistent multi-track timeline", state: "live" },
-  { label: "Real FFmpeg render & download", state: "next" },
+  { label: "Real FFmpeg render & download", state: "live" },
   { label: "Whisper transcription & burn-in captions", state: "planned" },
   { label: "Keyframed motion graphics", state: "planned" },
   { label: "Agent tools with approval", state: "planned" },

@@ -128,8 +128,9 @@ export function ExportModal({ open, project, onClose }: ExportModalProps) {
       </div>
 
       <p className="export-note">
-        Output is verified with ffprobe before download. Text and motion layers are
-        not burned in yet; video, audio and image clips are rendered.
+        Output is verified with ffprobe before download. Video, audio and image
+        clips are rendered from a single visual track. Text and motion layers are
+        not burned in yet.
       </p>
 
       <div className="export-actions">

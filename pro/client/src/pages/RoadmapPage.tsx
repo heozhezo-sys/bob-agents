@@ -45,7 +45,8 @@ export function RoadmapPage({
         <p className="panel-note">
           This screen shows no simulated controls, counts or results. It stays
           empty until the operation behind it is real and verified. Source
-          uploads, probing and the timeline are live in the editor today.
+          uploads, probing, the timeline and the FFmpeg export are live in the
+          editor today.
         </p>
         <Link to="/projects" className="btn btn-primary">
           Open a working project
