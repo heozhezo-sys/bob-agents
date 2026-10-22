@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Guards against a stylesheet that silently loses every rule after a break.
- * An unclosed rule makes the browser drop the rest of the file, which no
- * type check, API smoke or render smoke can see.
+ * Guards against a stylesheet that silently loses every rule after a break:
+ * an unclosed rule makes the browser drop the rest of the file, which a type
+ * check cannot see. This checks brace balance only.
  */
 import { readFile } from "node:fs/promises";
 import path from "node:path";
