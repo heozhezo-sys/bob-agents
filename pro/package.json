@@ -21,6 +21,7 @@
     "test": "npm run test --workspace=server",
     "smoke": "node scripts/smoke.mjs",
     "ui": "node scripts/ui-smoke.mjs",
+    "css:check": "node scripts/css-check.mjs",
     "fixtures": "node scripts/fixtures.mjs"
   },
   "devDependencies": {

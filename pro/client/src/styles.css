@@ -1212,7 +1212,6 @@ img {
 .modal-wide {
   max-width: min(780px, calc(100vw - 32px));
 }
-.export-summary {
 .modal-card {
   overflow: hidden;
   border: 1px solid var(--line);
