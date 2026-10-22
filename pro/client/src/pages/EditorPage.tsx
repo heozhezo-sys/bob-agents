@@ -23,6 +23,7 @@ import { MediaPanel } from "../components/editor/MediaPanel";
 import { PreviewStage } from "../components/editor/PreviewStage";
 import { Timeline, type ClipPatch } from "../components/editor/Timeline";
 import { Inspector } from "../components/editor/Inspector";
+import { ExportModal } from "../components/editor/ExportModal";
 import { Modal } from "../components/Modal";
 import { useToast } from "../components/Toast";
 import { useWaveforms } from "../hooks/useWaveforms";
@@ -47,6 +48,7 @@ export function EditorPage() {
   const [pxPerSecond, setPxPerSecond] = useState(64);
   const [mobilePanel, setMobilePanel] = useState<MobilePanel>("none");
   const [deleteTarget, setDeleteTarget] = useState<MediaAsset | null>(null);
+  const [exportOpen, setExportOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [titleDraft, setTitleDraft] = useState("");
   const [saveState, setSaveState] = useState<SaveState>("idle");
@@ -516,12 +518,9 @@ export function EditorPage() {
           <button
             type="button"
             className="btn btn-primary"
-            disabled
-            title="The FFmpeg render pipeline lands in Milestone 3"
-            aria-disabled="true"
+            onClick={() => setExportOpen(true)}
           >
             <Download size={15} /> Export
-            <span className="btn-badge">M3</span>
           </button>
         </div>
       </header>
@@ -644,6 +643,7 @@ export function EditorPage() {
           </button>
         </div>
       </Modal>
+      <ExportModal open={exportOpen} project={project} onClose={() => setExportOpen(false)} />
     </div>
   );
 }

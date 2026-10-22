@@ -62,6 +62,13 @@ async function main() {
       baseURL: BASE,
     });
     const page = await context.newPage();
+  page.on("console", (msg) => console.log(`[browser ${msg.type()}] ${msg.text()}`));
+  page.on("request", (req) => {
+    if (req.url().includes("/clips")) console.log(`[request] ${req.method()} ${req.url()}`);
+  });
+  page.on("response", (res) => {
+    if (res.url().includes("/clips")) console.log(`[response] ${res.status()} ${res.url()}`);
+  });
     attachDiagnostics(page, errors);
 
     console.log("Desktop flow");
@@ -181,10 +188,12 @@ async function main() {
 
     const clip = page.locator(".clip").first();
     const clipBox = await clip.boundingBox();
+    console.log("CLIPBOX", JSON.stringify(clipBox));
     if (!clipBox) throw new Error("Clip is not measurable");
     const clipResponse = waitForClipPatch();
     await page.mouse.move(clipBox.x + clipBox.width / 2, clipBox.y + clipBox.height / 2);
     await page.mouse.down();
+    await page.waitForTimeout(500);
     await page.mouse.move(
       clipBox.x + clipBox.width / 2 + 64,
       clipBox.y + clipBox.height / 2,
@@ -253,6 +262,17 @@ async function main() {
       { timeout: 10_000 },
     );
     check("start field shows seven seconds", true);
+
+  console.log("Export");
+  await page.getByRole("button", { name: "Export" }).click();
+  const startExport = page.getByRole("button", { name: "Start export" });
+  await startExport.waitFor({ timeout: 10_000 });
+  await startExport.click();
+  const downloadLink = page.getByRole("link", { name: "Download MP4" });
+  await downloadLink.waitFor({ timeout: 180_000 });
+  check("export produces a downloadable MP4", (await downloadLink.count()) === 1);
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(300);
 
     console.log("\nMobile flow");
     const mobile = await browser.newContext({

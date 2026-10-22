@@ -3,6 +3,7 @@ import type {
   MediaAsset,
   Project,
   ProjectDetail,
+  RenderJob,
   SessionInfo,
   WaveformData,
 } from "@ai-video-agent-studio/shared";
@@ -139,6 +140,14 @@ export const api = {
     request<{ project: ProjectDetail }>(`/api/projects/${projectId}/clips`, {
       method: "POST",
       body: input,
+    }),
+  listRenders: (projectId: string) =>
+    request<{ jobs: RenderJob[] }>(`/api/projects/${projectId}/renders`),
+  listAllRenders: () => request<{ jobs: RenderJob[] }>("/api/renders"),
+  startRender: (projectId: string) =>
+    request<{ job: RenderJob }>(`/api/projects/${projectId}/renders`, {
+      method: "POST",
+      body: {},
     }),
 
   getHealth: () =>

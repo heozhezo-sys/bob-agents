@@ -28,7 +28,7 @@ const NAV = [
   { to: "/motion", label: "Motion", icon: Sparkles, soon: true },
   { to: "/templates", label: "Templates", icon: LayoutTemplate, soon: true },
   { to: "/brand", label: "Brand kit", icon: Palette, soon: true },
-  { to: "/renders", label: "Renders", icon: ListVideo, soon: true },
+  { to: "/renders", label: "Renders", icon: ListVideo },
   { to: "/settings", label: "Settings", icon: Settings },
 ];
 

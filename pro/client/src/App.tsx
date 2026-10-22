@@ -23,6 +23,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { ProjectsPage } from "./pages/ProjectsPage";
 import { EditorPage } from "./pages/EditorPage";
+import { RenderQueuePage } from "./pages/RenderQueuePage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { RoadmapPage } from "./pages/RoadmapPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -173,24 +174,7 @@ export default function App() {
                   />
                 }
               />
-              <Route
-                path="renders"
-                element={
-                  <RoadmapPage
-                    title="Render queue"
-                    eyebrow="Pixels out"
-                    milestone="Milestone 3"
-                    icon={ListVideo}
-                    summary="A durable FFmpeg job queue with real progress parsed from the encoder, cancellation, retry and ffprobe-verified output."
-                    bullets={[
-                      "Render plans validated before a single frame is encoded.",
-                      "Progress from -progress pipe:1, not a fake timer.",
-                      "Cancel kills the process tree and cleans temp files.",
-                      "Output verified with ffprobe before it is offered for download.",
-                    ]}
-                  />
-                }
-              />
+              <Route path="renders" element={<RenderQueuePage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Route>

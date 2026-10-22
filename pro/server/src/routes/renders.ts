@@ -79,7 +79,20 @@ rendersRouter.get("/projects/:id/renders", requireAuth, (req, res) => {
     "SELECT * FROM render_jobs WHERE project_id = ? ORDER BY created_at DESC LIMIT 50",
     project.id,
   );
-  res.json({ jobs: rows.map(serializeRenderJob) });
+  res.json({ jobs: rows.map((row) => serializeRenderJob(row)) });
+});
+
+rendersRouter.get("/renders", requireAuth, (req, res) => {
+  const rows = all<OwnedRenderRow>(
+    `SELECT r.*, p.owner_id, p.name AS project_name
+       FROM render_jobs r
+       JOIN projects p ON p.id = r.project_id
+      WHERE p.owner_id = ?
+      ORDER BY r.created_at DESC
+      LIMIT 100`,
+    req.auth!.user.id,
+  );
+  res.json({ jobs: rows.map((row) => serializeRenderJob(row, row.project_name)) });
 });
 
 rendersRouter.get("/renders/:id", requireAuth, (req, res) => {
