@@ -8,6 +8,7 @@ import { config } from "./config.js";
 import { one } from "./db/index.js";
 import { AppError } from "./lib/errors.js";
 import { authRouter } from "./routes/auth.js";
+import { agentRouter } from "./routes/agent.js";
 import { projectsRouter } from "./routes/projects.js";
 import { clipsRouter } from "./routes/clips.js";
 import { rendersRouter } from "./routes/renders.js";
@@ -47,7 +48,12 @@ export function createApp() {
       version: "0.1.0",
       time: new Date().toISOString(),
       ffmpeg: true,
-      provider: { configured: Boolean(config.openCodeApiKey) },
+      provider: {
+        name: config.agentProvider,
+        model: config.openCodeModel,
+        configured:
+          config.agentProvider === "mock" || Boolean(config.openCodeApiKey),
+      },
     });
   });
 
@@ -57,6 +63,7 @@ export function createApp() {
   });
 
   app.use("/api/auth", authRouter);
+  app.use("/api/agent", agentRouter);
   app.use("/api/projects", clipsRouter);
   app.use("/api/projects", projectsRouter);
   app.use("/api/assets", mediaRouter);
