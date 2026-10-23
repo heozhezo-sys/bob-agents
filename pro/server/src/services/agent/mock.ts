@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import type { ProviderInput, ProviderReply } from "./provider.js";
 
 const CAPABILITIES =
-  "I can trim, split, move or delete clips, add a source, rename the project, or start an export.";
+  "I can trim, split, move or delete clips, add a source, generate a motion card, rename the project, or start an export.";
 
 export function mockProvider(input: ProviderInput): ProviderReply {
   const last = input.messages[input.messages.length - 1];
@@ -50,6 +50,39 @@ export function mockProvider(input: ProviderInput): ProviderReply {
       return { content: "This project has no video clip to delete.", toolCalls: [] };
     }
     return call("delete_clip", { clipId: lastVideoClip.id });
+  }
+  if (text.includes("motion") || text.includes("chart") || text.includes("title card")) {
+    if (text.includes("bar") || text.includes("chart")) {
+      return call("create_motion_graphic", {
+        layout: "bars",
+        title: "Weekly output",
+        subtitle: "Renders per day",
+        accent: "#ff8a3d",
+        bars: [
+          { label: "Mon", value: 4 },
+          { label: "Tue", value: 7 },
+          { label: "Wed", value: 5 },
+          { label: "Thu", value: 9 },
+        ],
+      });
+    }
+    if (text.includes("bullet")) {
+      return call("create_motion_graphic", {
+        layout: "bullets",
+        title: "Launch plan",
+        subtitle: "Three steps to the first cut",
+        bullets: [
+          "Upload the source footage",
+          "Generate the title cards",
+          "Export the master",
+        ],
+      });
+    }
+    return call("create_motion_graphic", {
+      layout: "title",
+      title: "Agent cut",
+      subtitle: "Made in CUTROOM",
+    });
   }
   if (text.includes("add")) {
     const asset = state.assets.find((item) => item.kind === "video") ?? state.assets[0];

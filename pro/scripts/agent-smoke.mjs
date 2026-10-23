@@ -257,6 +257,65 @@ async function main() {
       String(videoClipsOf(addedUndo.body.project).length),
     );
 
+    const card = await call("POST", "/api/agent/chat", {
+      projectId,
+      message: "Create a bar chart card",
+    });
+    check("motion chat returns 200", card.status === 200, JSON.stringify(card.body));
+    const cardActions = card.body.conversation.messages.at(-1)?.actions ?? [];
+    check(
+      "motion action is recorded",
+      cardActions.some(
+        (action) => action.tool === "create_motion_graphic" && action.ok === true,
+      ),
+      JSON.stringify(cardActions),
+    );
+    check(
+      "motion action carries a thumbnail",
+      typeof cardActions[0]?.thumbnailUrl === "string",
+      JSON.stringify(cardActions),
+    );
+    const cardAsset = card.body.project.assets.find((asset) =>
+      asset.originalName.startsWith("motion-"),
+    );
+    check("card is ingested as a source", Boolean(cardAsset), JSON.stringify(card.body.project.assets));
+    check(
+      "card is appended as a clip",
+      videoClipsOf(card.body.project).length === 3,
+      String(videoClipsOf(card.body.project).length),
+    );
+
+    if (cardAsset) {
+      const thumb = await fetch(`${BASE}${cardAsset.thumbnailUrl}`, {
+        headers: authHeaders,
+      });
+      check("card thumbnail is served", thumb.status === 200, String(thumb.status));
+      const stream = await fetch(`${BASE}/api/assets/${cardAsset.id}/stream`, {
+        headers: { ...authHeaders, range: "bytes=0-1023" },
+      });
+      check(
+        "card streams as an MP4",
+        stream.status === 206 &&
+          (stream.headers.get("content-type") ?? "").includes("video/mp4"),
+        `${stream.status} ${stream.headers.get("content-type")}`,
+      );
+    }
+
+    const cardUndo = await call(
+      "POST",
+      `/api/agent/turns/${card.body.conversation.turnId}/undo`,
+    );
+    check(
+      "undo removes the card clip",
+      videoClipsOf(cardUndo.body.project).length === 2,
+      String(videoClipsOf(cardUndo.body.project).length),
+    );
+    check(
+      "undo removes the generated source",
+      cardUndo.body.project.assets.length === 1,
+      String(cardUndo.body.project.assets.length),
+    );
+
     const exported = await call("POST", "/api/agent/chat", {
       projectId,
       message: "Start an export",

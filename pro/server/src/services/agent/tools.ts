@@ -9,6 +9,7 @@ import {
   splitClip,
   updateClip,
 } from "../clipEdits.js";
+import { createMotionGraphic, motionSpecSchema } from "../motionService.js";
 import { createRenderJob } from "../renderService.js";
 import { buildAgentState, type AgentProjectState } from "./state.js";
 import type { AgentToolDef } from "./provider.js";
@@ -32,6 +33,7 @@ export const MUTATING_TOOLS = new Set([
   "delete_clip",
   "add_clip",
   "rename_project",
+  "create_motion_graphic",
 ]);
 
 export const TOOL_DEFS: AgentToolDef[] = [
@@ -118,6 +120,51 @@ export const TOOL_DEFS: AgentToolDef[] = [
         type: "object",
         properties: { name: { type: "string" } },
         required: ["name"],
+        additionalProperties: false,
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "create_motion_graphic",
+      description:
+        "Create an animated title, bullet list or bar chart card as a real MP4 and append it to the timeline.",
+      parameters: {
+        type: "object",
+        properties: {
+          layout: {
+            type: "string",
+            enum: ["title", "bullets", "bars"],
+            description: "Card layout.",
+          },
+          title: { type: "string", description: "Card heading, 1-80 characters." },
+          subtitle: { type: "string", description: "Optional supporting line." },
+          bullets: {
+            type: "array",
+            maxItems: 5,
+            items: { type: "string" },
+            description: "Up to five short bullet lines for the bullets layout.",
+          },
+          bars: {
+            type: "array",
+            maxItems: 5,
+            description: "Up to five labeled values for the bars layout.",
+            items: {
+              type: "object",
+              properties: {
+                label: { type: "string" },
+                value: { type: "number", minimum: 0 },
+              },
+              required: ["label", "value"],
+              additionalProperties: false,
+            },
+          },
+          durationMs: { type: "integer", minimum: 2000, maximum: 15000 },
+          background: { type: "string", description: "Background color as #RRGGBB." },
+          accent: { type: "string", description: "Accent color as #RRGGBB." },
+        },
+        required: ["layout", "title"],
         additionalProperties: false,
       },
     },
@@ -246,6 +293,23 @@ export async function runAgentTool(
           ok: true,
           summary: `Renamed the project to "${input.name}".`,
           state: buildAgentState(ctx.projectId),
+        };
+      }
+      case "create_motion_graphic": {
+        const spec = parse(motionSpecSchema, args);
+        const result = await createMotionGraphic(ctx.userId, ctx.projectId, spec);
+        ctx.createdAssetIds.push(result.asset.id);
+        const label =
+          spec.layout === "title"
+            ? "title"
+            : spec.layout === "bullets"
+              ? "bullet"
+              : "bar chart";
+        return {
+          ok: true,
+          summary: `Generated a ${label} card and added it at ${result.startMs} ms.`,
+          state: buildAgentState(ctx.projectId),
+          thumbnailUrl: `/api/assets/${result.asset.id}/thumbnail`,
         };
       }
       case "start_export": {

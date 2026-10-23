@@ -25,6 +25,7 @@ const MILESTONES = [
   { label: "Whisper transcription & burn-in captions", state: "planned" },
   { label: "Keyframed motion graphics", state: "planned" },
   { label: "Chat agent with undo", state: "live" },
+  { label: "Generated title cards", state: "live" },
 ];
 
 export function DashboardPage() {

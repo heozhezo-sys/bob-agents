@@ -34,6 +34,7 @@ export const config = {
     process.env.OPENCODE_BASE_URL ?? "https://opencode.ai/inference/openai/v1",
   openCodeModel: process.env.OPENCODE_MODEL ?? "deepseek-v4.1-flash-free",
   agentProvider: process.env.AGENT_PROVIDER === "mock" ? "mock" : "opencode",
+  motionFont: process.env.MOTION_FONT ?? "",
   targetProxyHeight: Number.parseInt(process.env.PROXY_HEIGHT ?? "540", 10),
   maxRenderSeconds: Number.parseInt(process.env.MAX_RENDER_SECONDS ?? "1800", 10),
   logLevel: process.env.LOG_LEVEL ?? "info",
