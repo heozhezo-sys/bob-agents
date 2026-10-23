@@ -24,7 +24,7 @@ const MILESTONES = [
   { label: "Real FFmpeg render & download", state: "live" },
   { label: "Whisper transcription & burn-in captions", state: "planned" },
   { label: "Keyframed motion graphics", state: "planned" },
-  { label: "Agent tools with approval", state: "planned" },
+  { label: "Chat agent with undo", state: "live" },
 ];
 
 export function DashboardPage() {
