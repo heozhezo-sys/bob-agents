@@ -4,6 +4,8 @@
 
 **Goal:** A signed-in user opens `/agent`, picks a project, types an edit, and the server applies it through the same validated clip operations the editor uses — with an honest action list, a persisted transcript, and a guarded one-turn undo.
 
+> **Status (2026-10-23):** implemented and verified on `feature/agent-editor` (commits `97fe9a4`–`8e0d691`). Checkboxes below are kept as the original plan, not a live tracker. Deviations: `npm run db:migrate` was already broken (it points at a missing `src/db/migrate.ts`), so migrations were verified at server boot; the browser walkthrough ran a private mock API on port 4399 instead of restarting the dev API. The live OpenCode Zen path was not exercised because no key was available.
+
 **Architecture:** The agent is a server-side tool loop over OpenCode Zen's OpenAI-compatible chat completions endpoint (`AGENT_PROVIDER=mock` for deterministic tests). The clip mutations move out of `routes/clips.ts` into `services/clipEdits.ts` so HTTP and the agent share one validation path. Two SQLite tables hold messages and per-turn snapshots; undo restores a snapshot only when the project has not changed since. The client gets a chat page, a read-only clip strip and an Undo control; the manual editor is untouched.
 
 **Tech Stack:** Node 24 (`process.loadEnvFile`, `node:sqlite`, fetch), Express 5, zod 4, React 19 + Vite, TypeScript 7, FFmpeg via existing services, Playwright (walkthrough only).

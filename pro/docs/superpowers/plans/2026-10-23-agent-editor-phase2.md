@@ -7,6 +7,10 @@ clip and the file when the turn is undone. No new clip kind, no renderer changes
 **Design:** `docs/superpowers/specs/2026-10-23-agent-editor-design.md`, section
 "Motion cards".
 
+> **Status (2026-10-23):** implemented and verified on `feature/agent-editor` (commit
+> `60be802`). Title, bullets and bars were rendered and visually inspected; the model
+> path is mock-only because no real provider key was available.
+
 ## Global constraints
 
 - FFmpeg only. No new dependency, no browser/canvas renderer.
