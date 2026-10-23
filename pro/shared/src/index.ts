@@ -86,6 +86,41 @@ export interface ProjectDetail extends Project {
   durationMs: number;
 }
 
+export interface AgentAction {
+  tool: string;
+  ok: boolean;
+  summary: string;
+  thumbnailUrl?: string | null;
+}
+
+export interface AgentMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  actions: AgentAction[];
+  turnId: string | null;
+  createdAt: string;
+}
+
+export interface AgentProviderInfo {
+  name: "opencode" | "mock";
+  model: string;
+  configured: boolean;
+}
+
+export interface AgentConversation {
+  messages: AgentMessage[];
+  canUndo: boolean;
+  undoBlockedReason: string | null;
+  turnId: string | null;
+  provider: AgentProviderInfo;
+}
+
+export interface AgentChatResult {
+  project: ProjectDetail;
+  conversation: AgentConversation;
+}
+
 export type RenderStatus = "queued" | "running" | "succeeded" | "failed" | "cancelled";
 
 export interface RenderJob {
@@ -154,6 +189,13 @@ export const createClipSchema = z.object({
 });
 
 export type CreateClipInput = z.infer<typeof createClipSchema>;
+
+export const agentChatSchema = z.object({
+  projectId: z.string().uuid(),
+  message: z.string().trim().min(1).max(4000),
+});
+
+export type AgentChatInput = z.infer<typeof agentChatSchema>;
 
 export const CLIP_MIN_DURATION_MS = 100;
 

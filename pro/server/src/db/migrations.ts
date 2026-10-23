@@ -172,4 +172,34 @@ export const migrations: Migration[] = [
       );
     `,
   },
+  {
+    id: "002_agent",
+    sql: `
+      CREATE TABLE IF NOT EXISTS agent_messages (
+        id TEXT PRIMARY KEY,
+        project_id TEXT NOT NULL,
+        role TEXT NOT NULL CHECK (role IN ('user', 'assistant')),
+        content TEXT NOT NULL,
+        actions_json TEXT NOT NULL DEFAULT '[]',
+        turn_id TEXT,
+        created_at TEXT NOT NULL,
+        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+      );
+      CREATE INDEX IF NOT EXISTS idx_agent_messages_project
+        ON agent_messages(project_id, created_at);
+
+      CREATE TABLE IF NOT EXISTS agent_turns (
+        id TEXT PRIMARY KEY,
+        project_id TEXT NOT NULL,
+        snapshot_json TEXT NOT NULL,
+        created_asset_ids_json TEXT NOT NULL DEFAULT '[]',
+        project_updated_at TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        undone_at TEXT,
+        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+      );
+      CREATE INDEX IF NOT EXISTS idx_agent_turns_project
+        ON agent_turns(project_id, created_at DESC);
+    `,
+  },
 ];

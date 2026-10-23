@@ -15,8 +15,9 @@ function main(): void {
     console.log(`[cutroom] listening on http://${config.host}:${config.port}`);
     console.log(`[cutroom] data directory: ${config.dataDir}`);
     console.log(
-      `[cutroom] model provider: ${config.openCodeApiKey ? "configured" : "not configured (agent uses rule-based commands)"}`,
+      `[cutroom] model provider: ${config.openCodeApiKey ? "configured" : "not configured (agent chat returns 503)"}`,
     );
+    console.log(`[cutroom] agent provider: ${config.agentProvider}`);
   });
 
   const shutdown = (signal: string) => {
