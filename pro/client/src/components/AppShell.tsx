@@ -22,7 +22,7 @@ import { api } from "../api";
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/projects", label: "Projects", icon: FolderOpen },
-  { to: "/agent", label: "AI Agent", icon: Bot, soon: true },
+  { to: "/agent", label: "AI Agent", icon: Bot },
   { to: "/media", label: "Media", icon: Film },
   { to: "/transcripts", label: "Transcripts", icon: FileText, soon: true },
   { to: "/motion", label: "Motion", icon: Sparkles, soon: true },

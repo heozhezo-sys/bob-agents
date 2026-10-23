@@ -1,4 +1,5 @@
 import type {
+  AgentChatResult,
   ApiErrorBody,
   MediaAsset,
   Project,
@@ -148,6 +149,18 @@ export const api = {
     request<{ job: RenderJob }>(`/api/projects/${projectId}/renders`, {
       method: "POST",
       body: {},
+    }),
+
+  getAgentState: (projectId: string) =>
+    request<AgentChatResult>(`/api/agent/projects/${projectId}`),
+  sendAgentMessage: (projectId: string, message: string) =>
+    request<AgentChatResult>("/api/agent/chat", {
+      method: "POST",
+      body: { projectId, message },
+    }),
+  undoAgentTurn: (turnId: string) =>
+    request<AgentChatResult>(`/api/agent/turns/${turnId}/undo`, {
+      method: "POST",
     }),
 
   getHealth: () =>

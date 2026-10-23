@@ -7,7 +7,6 @@ import {
   Routes,
 } from "react-router-dom";
 import {
-  Bot,
   FileText,
   Film,
   LayoutTemplate,
@@ -24,6 +23,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { ProjectsPage } from "./pages/ProjectsPage";
 import { EditorPage } from "./pages/EditorPage";
 import { RenderQueuePage } from "./pages/RenderQueuePage";
+import { AgentPage } from "./pages/AgentPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { RoadmapPage } from "./pages/RoadmapPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -65,25 +65,7 @@ export default function App() {
               <Route path="projects" element={<ProjectsPage />} />
               <Route path="projects/:id" element={<EditorPage />} />
               <Route path="settings" element={<SettingsPage />} />
-              <Route
-                path="agent"
-                element={
-                  <RoadmapPage
-                    title="AI Agent"
-                    eyebrow="Direct the cut"
-                    milestone="Milestone 6"
-                    icon={Bot}
-                    summary="A natural-language agent that calls the same validated editing tools the UI uses. It will not receive a shell, and it will not touch a source file."
-                    bullets={[
-                      "Plan-first edits: trim, split, reorder and delete with a visible diff.",
-                      "Title and caption insertion using the real keyframe model.",
-                      "Silence removal driven by transcript timestamps, not guesses.",
-                      "Render requests routed through the verified FFmpeg queue.",
-                      "OpenCode Zen provider with server-side key storage.",
-                    ]}
-                  />
-                }
-              />
+              <Route path="agent" element={<AgentPage />} />
               <Route
                 path="media"
                 element={
