@@ -22,6 +22,7 @@
     "smoke": "node scripts/smoke.mjs",
     "ui": "node scripts/ui-smoke.mjs",
     "render:smoke": "node scripts/render-smoke.mjs",
+    "purge:smoke": "node scripts/purge-smoke.mjs",
     "css:check": "node scripts/css-check.mjs",
     "fixtures": "node scripts/fixtures.mjs"
   },
