@@ -23,6 +23,7 @@
     "ui": "node scripts/ui-smoke.mjs",
     "render:smoke": "node scripts/render-smoke.mjs",
     "agent:smoke": "node scripts/agent-smoke.mjs",
+    "agent:wire": "node scripts/agent-wire-smoke.mjs",
     "purge:smoke": "node scripts/purge-smoke.mjs",
     "css:check": "node scripts/css-check.mjs",
     "fixtures": "node scripts/fixtures.mjs"
