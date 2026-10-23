@@ -147,7 +147,6 @@ export function Timeline({
 
   useEffect(() => {
     if (!drag) return;
-    console.log("effect run", drag.clip.id, drag);
     const thresholdMs = Math.max(2, 10 / pxPerMs);
 
     const snap = (value: number, excludeClipId: string): number => {
@@ -178,7 +177,6 @@ export function Timeline({
       );
 
     const onMove = (event: PointerEvent) => {
-      console.log("onMove", event.clientX, drag.originX);
       const dxMs = (event.clientX - drag.originX) / pxPerMs;
       if (Math.abs(event.clientX - drag.originX) > 2) drag.moved = true;
       const asset = drag.clip.assetId ? assetById.get(drag.clip.assetId) : null;
@@ -259,8 +257,7 @@ export function Timeline({
       setPreview(next);
     };
 
-    const finish = (event?: PointerEvent) => {
-      console.log("FINISH", event?.type);
+    const finish = () => {
       const next = previewRef.current;
       if (drag.moved && next) {
         if (drag.mode === "move" && next.startMs !== drag.originStart) {
@@ -284,7 +281,6 @@ export function Timeline({
     window.addEventListener("pointerup", finish, { once: true });
     window.addEventListener("pointercancel", finish, { once: true });
     return () => {
-      console.log("effect cleanup", drag?.clip.id);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", finish);
       window.removeEventListener("pointercancel", finish);
@@ -297,11 +293,10 @@ export function Timeline({
     mode: DragMode,
     locked: boolean,
   ) => {
-    console.log("BEGIN_DRAG", clip.id);
     if (event.button !== 0) return;
     event.preventDefault();
     event.stopPropagation();
-    // onSelectClip(clip);
+    onSelectClip(clip);
     if (locked) return;
     setDrag({
       mode,
