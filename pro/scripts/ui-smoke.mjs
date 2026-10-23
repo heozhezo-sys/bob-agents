@@ -313,6 +313,13 @@ async function main() {
 
     await mobile.close();
 
+    const session = await page.request.get(`${API}/api/auth/me`);
+    const { csrfToken } = await session.json();
+    const cleanup = await page.request.delete(`${API}/api/projects/${projectId}`, {
+      headers: { "x-csrf-token": csrfToken },
+    });
+    check("the browser suite deletes its project", cleanup.status() === 200, String(cleanup.status()));
+
     const health = await fetch(`${API}/api/health`).then((response) => response.json());
     check("API health is green", health.ok === true && health.ffmpeg === true, JSON.stringify(health));
 
