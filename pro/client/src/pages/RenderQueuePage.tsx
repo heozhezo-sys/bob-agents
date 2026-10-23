@@ -70,7 +70,7 @@ export function RenderQueuePage() {
         <div className="empty-state">
           <ListVideo size={28} aria-hidden="true" />
           <h3>No renders yet</h3>
-          <p>Open a project and use Export to queue a real FFmpeg render.</p>
+          <p>No export has been requested yet. Open a project and use Export.</p>
         </div>
       ) : (
         <div className="job-list">
